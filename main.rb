@@ -18,47 +18,30 @@ output_file_path = '検索結果_duckduckgo.txt'
 # 企業名リストを読み込む
 lines = File.readlines(input_file_path)
 
-EXCLUDE_WORDS = %w(
-  ホットペッパー
-  化粧品検定
-  検索結果
-  一覧
-  tiktok
-  kirei
-  instagram
-  esthete
-  event
-  panolabollc
-  ekiten
-  indeed
-  口コミ
-  体験
-  体験談
-  体験レポート
-  体験記
-  体験者
-  yahoo
-  iyasheep
-  求人
-  linkedin
-  おすすめ
-  beauty-park
-  はてな
-  hermo-style
+EXCLUDE_SITES = %w(
+  beautifyjp.net
+  beauty-job.biz
+  beauty.biglobe.ne.jp
+  beauty.hotpepper.jp
+  beauty.rakuten.co.jp
+  biyousitu.yu-nagi.com
+  blogtag.ameba.jp
   hairbook.jp
-  burari.net
-  facebook.com
-  biew.jp
-  varie-group.jp
-  salontime
-  esthesearch
-  rakuten
-  楽天
-  gekiyasu-biyouin.com
   hairlog.jp
-  pilotfree.com
-  kakaku.guide
-
+  hermo-style.com
+  kireistyle-woman.com
+  map.yahoo.co.jp
+  minimodel.jp
+  page.line.me
+  zouri.jp
+  web.fc2.com
+  stylelog.tokyo
+  www.ameba.jp
+  www.beauty-park.jp
+  www.ekiten.jp
+  www.instagram.com
+  www.navitime.co.jp
+  www.yelp.com
 ).freeze
 
 lines.each_with_index do |line, idx|
@@ -67,7 +50,7 @@ lines.each_with_index do |line, idx|
   line.gsub!("\t", ' ')
   next if line.empty?
 
-  search_keyword = "#{line} #{EXCLUDE_WORDS.map { |w| "-#{w}"}.join(' ')}"
+  search_keyword = "#{line} #{EXCLUDE_SITES.map { |w| "-#{w}"}.join(' ')}"
 
   user_agent = if rand(0..5) % 2 == 0
     "Mozilla/5.0 (Windows NT 10.#{rand 9}; Win64; x64)"
@@ -84,13 +67,14 @@ lines.each_with_index do |line, idx|
   search_box.submit
 
   earth_link = driver.find_elements(xpath: "//div[contains(text(), 'ウェブサイト')]/parent::a")[0]
+  result = "\tちょりぽん\t"
   result = if earth_link
               earth_link.attribute('href')
             else
               first_result = driver.find_elements(xpath: '//h2/a')[0] # DuckDuckGo
               # first_result = driver.find_elements(xpath: '//h3[1]/parent::a')[0]  # Google
               first_result.attribute('href') unless first_result.nil?
-            end || "\t該当URLなし"
+            end || '該当URLなし'
 
   # ウェイトを入れる
   # sleep(rand 3)
