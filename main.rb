@@ -12,7 +12,7 @@ driver = Selenium::WebDriver.for(:chrome, options: options)
 driver.manage.timeouts.implicit_wait = 3
 
 # 企業名リストのファイルパス
-input_file_path = '企業名リスト.txt'
+input_file_path = '検索キーワード一覧.txt'
 output_file_path = '検索結果_duckduckgo.txt'
 
 # 企業名リストを読み込む
