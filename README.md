@@ -1,8 +1,12 @@
+```sh
 gem install selenium-webdriver
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --disable-gcm --user-data-dir=/tmp/chrome_dev
 time ruby main.rb
+```
 
 ========================================================
+
+```sh
 gem install pry-byebug
 brew install pipx
 python3 -m venv myenv
@@ -16,3 +20,4 @@ pip install selenium
 playwright install chromium --with-deps --no-shell
 
 time ruby run_search.rb
+```
