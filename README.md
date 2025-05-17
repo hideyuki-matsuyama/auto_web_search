@@ -10,6 +10,7 @@
 # Python でのアプローチ
 
 - AI エージェントがウェブブラウザを操作できるようにするためのライブラリ [Browser Use](https://github.com/browser-use/browser-use) を利用する
+- https://github.com/hideyuki-matsuyama/browser_use に移動
 
 # メモ
 
